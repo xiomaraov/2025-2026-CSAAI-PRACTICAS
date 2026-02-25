@@ -1,0 +1,121 @@
+/* --- Estilos de Aprendiz de Programador --- */
+
+body {
+    margin: 0;
+    padding-top: 80px; 
+    font-family: 'Quicksand', sans-serif;
+    background: url("fondominions.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+}
+
+/* --- MENÚ DE NAVEGACIÓN ESTÁTICO --- */
+.navbar {
+    background: rgba(255, 20, 147, 0.9);
+    padding: 15px 0;
+    text-align: center;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    background: #ff69b4;
+    padding: 10px 25px;
+    border-radius: 30px;
+    /* Quitamos el transition para que sea instantáneo */
+}
+
+/* Efecto visual simple al pasar el ratón (sin movimiento) */
+.navbar a:hover {
+    background: white;
+    color: #ff1493;
+    /* Eliminamos el transform y la sombra compleja */
+}
+
+/* --- CLASE PARA LA PÁGINA ACTIVA --- */
+.navbar a.activo {
+    background: #c71585; 
+    border-bottom: 4px solid white; 
+    color: white;
+    pointer-events: none; 
+}
+
+/* --- LAYOUT Y COLUMNAS --- */
+.contenedor-web {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 40px auto;
+    gap: 20px;
+    padding: 10px;
+}
+
+.col-perfil {
+    flex: 1;
+    min-width: 300px;
+    background: rgba(255, 240, 245, 0.9);
+    padding: 25px;
+    border-radius: 20px; /* Bordes más sencillos */
+    border: 3px solid #ff69b4;
+}
+
+.foto-principal {
+    width: 100%;
+    border-radius: 15px;
+    border: 5px solid white;
+}
+
+.col-cv {
+    flex: 2;
+    min-width: 350px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+}
+
+/* --- TEXTOS --- */
+h1, h2, h3 {
+    font-family: 'Luckiest Guy', cursive;
+    color: #d81b60;
+}
+
+.titulo-cv {
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.gif-decorativo {
+    display: block;
+    margin: 20px auto;
+    width: 220px;
+}
+
+.bloque {
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px dotted #ffc1e3;
+}
+
+.nota-voz {
+    background: #fff0f5;
+    padding: 15px;
+    border-radius: 20px;
+    border-left: 8px solid #ff1493;
+    font-weight: bold;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .contenedor-web {
+        flex-direction: column;
+    }
+}
