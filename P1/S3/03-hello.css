@@ -1,0 +1,30 @@
+/* Ejemplo de hoja de estilo */
+
+/* Estilo para el cuerpo del HTML */
+body {
+  background-color: lightblue;
+}
+
+/* Estilo para las etiquetas de tipo h1 */
+h1 {
+  color:black;
+}
+
+h2{
+    color:pink
+}
+·/* Estilo para el párrafo con id "ESPECIAL" */
+#ESPECIAL   {
+    background-color: white;
+    color:yellow;
+}
+
+/* Estilo para los elementos con clase "migrupo" */
+.migrupo {
+  background-color: orange;
+  color: white
+}
+/* Estilo para los párrafos */
+p {
+  color: blue;
+}
