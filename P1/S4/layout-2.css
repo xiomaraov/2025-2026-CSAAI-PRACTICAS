@@ -74,7 +74,7 @@ footer {
 }
 
 /* PASO 2: RESPONSIVE */
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   aside, article {
     float: none;      /* vuelven al flujo normal */
     width: 100%;
