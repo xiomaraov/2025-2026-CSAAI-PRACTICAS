@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"> 
+    <title> El JUEGO DEL ¡BOOM!💥 </title>
+</head>
+<body>
+
+    <div class="contenedor-principal">
+        <h1>💥 B O O M 💣</h1>
+        
+        <div class="pantalla">
+            <div id="clave-display" class="clave-container">
+                <span id="pos0" class="numero-oculto">*</span>
+                <span id="pos1" class="numero-oculto">*</span>
+                <span id="pos2" class="numero-oculto">*</span>
+                <span id="pos3" class="numero-oculto">*</span>
+            </div>
+            
+            <div id="crono">0:00:00</div>
+            
+            <p>Intentos restantes: <b id="intentos-txt">7</b></p>
+            
+            <div id="mensaje">Nueva partida preparada. Pulsa Start o un número para comenzar.</div>
+        </div>
+
+        <div id="teclado" class="teclado">
+            <button class="btn-num" onclick="pulsarDigito(7, this)">7</button>
+            <button class="btn-num" onclick="pulsarDigito(8, this)">8</button>
+            <button class="btn-num" onclick="pulsarDigito(9, this)">9</button>
+            <button class="btn-num" onclick="pulsarDigito(4, this)">4</button>
+            <button class="btn-num" onclick="pulsarDigito(5, this)">5</button>
+            <button class="btn-num" onclick="pulsarDigito(6, this)">6</button>
+            <button class="btn-num" onclick="pulsarDigito(1, this)">1</button>
+            <button class="btn-num" onclick="pulsarDigito(2, this)">2</button>
+            <button class="btn-num" onclick="pulsarDigito(3, this)">3</button>
+            <button class="btn-num" onclick="pulsarDigito(0, this)">0</button>
+        </div>
+
+        <div class="controles">
+            <button id="btn-start" onclick="iniciarJuego()" class="btn-start">Start</button>
+            <button id="btn-stop" onclick="pararJuego()" class="btn-stop">Stop</button>
+            <button id="btn-reset" onclick="resetJuego()" class="btn-reset">Reset</button>
+        </div>
+    </div>
+
+    <script src="crono.js"></script>
+</body>
+<audio id="sonido-click" src="click.mp3"></audio>
+<audio id="sonido-ganar" src="win.mp3"></audio>
+<audio id="sonido-perder" src="lose.mp3"></audio>
+</html>
