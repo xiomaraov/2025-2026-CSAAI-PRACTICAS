@@ -130,3 +130,12 @@ button:disabled {
     font-size: 0.85em;
     line-height: 1.4;
 }
+/* Esto va al final de tu archivo style.css */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem; /* Letra más pequeña en móviles */
+    }
+    .teclado {
+        gap: 5px; /* Botones un poco más juntos para que quepan */
+    }
+}
