@@ -1,11 +1,11 @@
 // VARIABLES DEL JUEGO
 var claveSecreta = [];
-var intentos = 7; // Máximo 7 intentos [cite: 15]
+var intentos = 7; // Máximo 7 intentos
 var intentosConsumidos = 0;
 var ms = 0; 
 var intervalo = null;
 
-// Al cargar la página inicializamos el juego [cite: 44]
+// Al cargar la página inicializamos el juego
 window.onload = function() {
     resetJuego();
 };
@@ -22,15 +22,20 @@ function generarClave() {
 }
 
 function pulsarDigito(num, boton) {
-    // Si el crono no está iniciado, arranca automáticamente [cite: 49]
+    // Si el crono no está iniciado, arranca automáticamente
     if (!intervalo) {
         iniciarJuego();
     }
     
-    // Evitar pulsar si ya no hay intentos o el botón está desactivado [cite: 54]
+    // Evitar pulsar si ya no hay intentos o el botón está desactivado
     if (intentos <= 0 || boton.disabled) return;
 
-    // Desactivar botón y marcar como usado [cite: 54, 179]
+    // --- REPRODUCIR SONIDO CLICK ---
+    let sndClick = document.getElementById("sonido-click");
+    sndClick.currentTime = 0; // Reinicia el audio por si se pulsa muy rápido
+    sndClick.play().catch(() => {}); // El catch evita errores de carga del navegador
+
+    // Desactivar botón y marcar como usado
     boton.disabled = true;
     boton.classList.add("usado");
 
@@ -43,7 +48,7 @@ function pulsarDigito(num, boton) {
         if (claveSecreta[i] === num) {
             let span = document.getElementById("pos" + i);
             span.innerText = num;
-            // Cambiar color al acertar (vía clase CSS) [cite: 46, 53]
+            // Cambiar color al acertar (vía clase CSS)
             span.classList.remove("numero-oculto");
             span.classList.add("numero-acierto");
             acierto = true;
@@ -67,28 +72,36 @@ function comprobarFinal() {
         }
     }
 
-    // Victoria [cite: 105, 107, 123]
+    // Victoria
     if (acertados === 4) {
         pararJuego();
+
+        // --- REPRODUCIR SONIDO GANAR ---
+        document.getElementById("sonido-ganar").play().catch(() => {});
+
         let tiempoFinal = document.getElementById("crono").innerText;
         document.getElementById("mensaje").innerText = 
             "¡Clave descubierta! Tiempo: " + tiempoFinal + 
             " - Consumidos: " + intentosConsumidos + 
             " - Restantes: " + intentos;
     } 
-    // Derrota [cite: 79, 81, 91]
+    // Derrota
     else if (intentos <= 0) {
         pararJuego();
+
+        // --- REPRODUCIR SONIDO PERDER ---
+        document.getElementById("sonido-perder").play().catch(() => {});
+
         document.getElementById("mensaje").innerText = 
             "BOOM. Has agotado los intentos. La clave era " + claveSecreta.join("") + ". Pulsa Reset.";
-        // Revelar la clave al perder [cite: 81]
+        // Revelar la clave al perder
         for(let i = 0; i < 4; i++) {
             document.getElementById("pos" + i).innerText = claveSecreta[i];
         }
     }
 }
 
-// FUNCIONES DE CONTROL [cite: 139, 142, 166]
+// FUNCIONES DE CONTROL
 function iniciarJuego() {
     if (intervalo) return; 
     let inicio = Date.now() - ms;
@@ -98,7 +111,7 @@ function iniciarJuego() {
         let m = Math.floor(totalSegundos / 60);
         let s = totalSegundos % 60;
         let c = Math.floor((ms % 1000) / 10);
-        // Formato m:ss:cc [cite: 20, 57]
+        // Formato m:ss:cc
         document.getElementById("crono").innerText = 
             m + ":" + (s < 10 ? "0" + s : s) + ":" + (c < 10 ? "0" + c : c);
     }, 10);
@@ -113,17 +126,17 @@ function pararJuego() {
 }
 
 function resetJuego() {
-    // Detener crono y resetear tiempo [cite: 166]
+    // Detener crono y resetear tiempo
     pararJuego();
     ms = 0;
     document.getElementById("crono").innerText = "0:00:00";
     
-    // Restaurar intentos [cite: 169]
+    // Restaurar intentos
     intentos = 7;
     intentosConsumidos = 0;
     document.getElementById("intentos-txt").innerText = intentos;
     
-    // Nueva clave y ocultar dígitos [cite: 167, 170]
+    // Nueva clave y ocultar dígitos
     generarClave();
     for (let i = 0; i < 4; i++) {
         let span = document.getElementById("pos" + i);
@@ -131,7 +144,7 @@ function resetJuego() {
         span.className = "numero-oculto";
     }
     
-    // Habilitar todos los botones numéricos [cite: 171]
+    // Habilitar todos los botones numéricos
     let botones = document.querySelectorAll(".btn-num");
     botones.forEach(b => {
         b.disabled = false;
