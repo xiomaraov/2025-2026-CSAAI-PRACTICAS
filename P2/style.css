@@ -8,7 +8,7 @@ body {
     align-items: center; /* Centrado vertical */
     min-height: 100vh;
     margin: 0;
-    position: relative; /* Necesario para la capa de fondo */
+    position: relative;
     overflow: hidden;
 }
 
@@ -23,18 +23,17 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.15; /* Ajusta este número (0.1 a 0.9) para la transparencia */
+    opacity: 0.15; /* Ajusta la transparencia */
     z-index: -1;   /* Lo envía al fondo */
 }
 
 .contenedor-principal {
-    /* Aquí ya no tienes el box-shadow azul, solo tu borde original */
-    border: 5px solid rgb(47, 205, 233);
+    border: 5px solid rgb(42, 52, 244);
     background-color: white; 
     padding: 30px;
     text-align: center;
     width: 380px;
-    position: relative; /* Asegura que esté por encima del fondo */
+    position: relative; /*  Nos aseguramos de que esté por encima del fondo */
     z-index: 1;
 }
 
@@ -130,7 +129,7 @@ button:disabled {
     font-size: 0.85em;
     line-height: 1.4;
 }
-/* Esto va al final de tu archivo style.css */
+/* VISUALIZACIÓN DISPOSITIVOS MÓVILES */
 @media (max-width: 480px) {
     h1 {
         font-size: 1.5rem; /* Letra más pequeña en móviles */
