@@ -161,3 +161,69 @@ body {
   text-align: center;
   box-shadow: 0 0 30px #ff0077;
 }
+
+/* --- ADAPTACIÓN PARA MÓVILES (AÑADIR AL FINAL) --- */
+
+@media (max-width: 768px) {
+  /* Hacemos que el título no sea tan gigante */
+  .game-title {
+    font-size: 20px;
+    margin: 5px 0;
+  }
+
+  /* Cambiamos la proporción del juego para que no se vea como una tira fina */
+  #game-container {
+    aspect-ratio: 4 / 3; 
+    width: 98vw;
+    border-width: 2px;
+  }
+
+  /* Ajustamos el HUD (Puntos, Vidas, Energía) */
+  #ui-layer {
+    padding: 8px;
+    font-size: 11px;
+  }
+
+  #energy-bar {
+    width: 70px;
+    height: 10px;
+  }
+
+  /* Botón START más cómodo para el dedo */
+  #single-level {
+    padding: 15px 30px;
+    font-size: 18px;
+  }
+
+  /* PANEL DE CONTROLES PARA MÓVIL */
+  .game-controls {
+    margin-top: 15px;
+    padding: 10px;
+    width: 95vw;
+    gap: 15px; /* Menos espacio entre grupos */
+  }
+
+  /* Hacemos los botones más grandes para que sea fácil tocarlos */
+  .game-controls button {
+    width: 60px;
+    height: 60px;
+    font-size: 22px;
+  }
+
+  /* Ocultamos las etiquetas de texto para que no estorben */
+  .control-label {
+    display: none;
+  }
+
+  /* Si usas el modal de Game Over, que ocupe más espacio */
+  .modal-content {
+    width: 85%;
+    padding: 20px;
+  }
+}
+
+/* Soporte para móviles muy pequeños o en horizontal */
+@media (max-height: 500px) {
+  .game-title { display: none; } /* Ocultar título si hay poco espacio vertical */
+  #game-container { aspect-ratio: 16 / 7; }
+}
