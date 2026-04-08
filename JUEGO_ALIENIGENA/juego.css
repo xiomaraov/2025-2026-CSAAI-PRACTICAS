@@ -1,0 +1,223 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(circle, #e4b419 0%, #d2cfee 100%);
+  background:url("fondo_espacio.jpg");
+  font-family: 'Orbitron', sans-serif;
+  overflow: hidden;
+  color: white;
+  touch-action: none;
+}
+
+.game-title {
+  margin: 10px 0;
+  color: #a5f1af;
+  text-shadow: 0 0 10px #65ca6a, 0 0 20px #75ac7e;
+  font-size: 28px;
+  text-align: center;
+}
+
+#game-container {
+  position: relative;
+  width: 95vw;
+  max-width: 1100px;
+  aspect-ratio: 11 / 5;
+  border: 3px solid #e177b6;
+  box-shadow: 0 0 25px rgba(225, 119, 182, 0.4);
+  background-color: #2692a5;
+}
+
+#canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* INTERFAZ SUPERIOR  */
+#ui-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+#energy-bar { width: 120px; height: 15px; border: 2px solid #00ffff; background: #000; }
+#energy-fill { width: 100%; height: 100%; background: #00ffff; transition: width 0.2s; }
+
+/*  BOTÓN START MISSION (INICIO DEL JUEGO)  */
+.modos {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+
+#single-level {
+  background: #ff0077;
+  color: white;
+  padding: 25px 50px;
+  font-size: 28px;
+  font-family: 'Orbitron', sans-serif;
+  border: 4px solid #00ffff;
+  cursor: pointer;
+  box-shadow: 0 0 20px #ff0077;
+  transition: 0.3s;
+  text-transform: uppercase;
+}
+
+#single-level:hover {
+  transform: scale(1.05) translate(-0%, -0%); /* Ajuste para mantener el centro */
+  background: #00ffff;
+  color: #ff0077;
+}
+
+.game-controls {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 15px 40px;
+  background: rgba(26, 92, 101, 0.3); 
+  border: 2px solid #e177b6;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(225, 119, 182, 0.2);
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.control-label {
+  font-size: 10px;
+  color: #a5f1af;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.game-controls button {
+  width: 45px;
+  height: 45px;
+  background: #1a1a2e;
+  border: 2px solid #00ffff;
+  color: #00ffff;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-controls button:hover {
+  background: #00ffff;
+  color: #1a1a2e;
+  box-shadow: 0 0 15px #00ffff;
+}
+
+
+.btn-shoot {
+  border-color: #ff0077 !important;
+  color: #ff0077 !important;
+}
+
+.btn-shoot:hover {
+  background: #ff0077 !important;
+  color: white !important;
+  box-shadow: 0 0 15px #ff0077 !important;
+}
+
+.modal {
+  display: none;
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85);
+  z-index: 200;
+  justify-content: center; align-items: center;
+}
+
+.modal-content {
+  background: #1a1a2e;
+  padding: 40px;
+  border: 3px solid #ff0077;
+  text-align: center;
+  box-shadow: 0 0 30px #ff0077;
+}
+
+/*  ADAPTACIÓN PARA MÓVILES  */
+
+@media (max-width: 768px) {
+  .game-title {
+    font-size: 20px;
+    margin: 5px 0;
+  }
+
+  /* Configuracion para la proporción del juego */
+  #game-container {
+    aspect-ratio: 4 / 3; 
+    width: 98vw;
+    border-width: 2px;
+  }
+
+  /* Ajustamos el HUD (Puntos, Vidas, Energía) */
+  #ui-layer {
+    padding: 8px;
+    font-size: 11px;
+  }
+
+  #energy-bar {
+    width: 70px;
+    height: 10px;
+  }
+
+  /* Botón START más cómodo para el dedo */
+  #single-level {
+    padding: 15px 30px;
+    font-size: 18px;
+  }
+
+  /* PANEL DE CONTROLES PARA MÓVIL */
+  .game-controls {
+    margin-top: 15px;
+    padding: 10px;
+    width: 95vw;
+    gap: 15px; 
+  }
+
+  .game-controls button {
+    width: 60px;
+    height: 60px;
+    font-size: 22px;
+  }
+
+  .control-label {
+    display: none;
+  }
+
+  .modal-content {
+    width: 85%;
+    padding: 20px;
+  }
+}
+
+@media (max-height: 500px) {
+  .game-title { display: none; } /* Ocultar título si hay poco espacio vertical */
+  #game-container { aspect-ratio: 16 / 7; }
+}

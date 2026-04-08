@@ -1,0 +1,140 @@
+body {
+    background-color: #feee74;
+    /* Quitamos la imagen de aquí para que no sea opaca */
+    color: rgb(233, 47, 149); 
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centrado vertical */
+    min-height: 100vh;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* NUEVA CAPA PARA LA IMAGEN TRANSPARENTE */
+body::before {
+    content: "";
+    background-image: url(BOOM.png);
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.15; /* Ajusta la transparencia */
+    z-index: -1;   /* Lo envía al fondo */
+}
+
+.contenedor-principal {
+    border: 5px solid rgb(42, 52, 244);
+    background-color: white; 
+    padding: 30px;
+    text-align: center;
+    width: 380px;
+    position: relative; /*  Nos aseguramos de que esté por encima del fondo */
+    z-index: 1;
+}
+
+
+
+#crono {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 15px 0;
+    color: #333;
+    letter-spacing: 2px;
+}
+
+.clave-container span {
+    border: 3px solid rgb(47, 205, 233);
+    display: inline-block;
+    width: 55px;
+    height: 55px;
+    line-height: 50px; 
+    font-size: 28px;
+    margin: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.numero-oculto {
+    color: rgb(47, 205, 233);
+    background-color: #f0f0f0;
+}
+
+.numero-acierto {
+    color: #fff;
+    background-color: #28a745; 
+    border-color: #28a745;
+}
+
+.teclado {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 25px 0;
+}
+
+.btn-num:last-child {
+    grid-column: 2;
+}
+
+button {
+    background: white;
+    color: rgb(118, 17, 72);
+    border: 3px solid rgb(233, 47, 149);
+    padding: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: 0.2s;
+}
+
+button:hover:not(:disabled) {
+    background-color: rgb(233, 47, 149);
+    color: white;
+}
+
+button:disabled {
+    background-color: #eee;
+    color: #bbb;
+    border-color: #ddd;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.controles {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.controles button {
+    flex: 1;
+    font-size: 0.9rem;
+    padding: 10px 5px;
+}
+
+.btn-start { color: #28a745; border-color: #28a745; }
+.btn-stop { color: #dc3545; border-color: #dc3545; }
+.btn-reset { color: #fd7e14; border-color: #fd7e14; }
+
+#mensaje {
+    margin-top: 20px;
+    padding: 10px;
+    background: #fff8c4;
+    border-radius: 5px;
+    font-size: 0.85em;
+    line-height: 1.4;
+}
+/* VISUALIZACIÓN DISPOSITIVOS MÓVILES */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem; /* Letra más pequeña en móviles */
+    }
+    .teclado {
+        gap: 5px; /* Botones un poco más juntos para que quepan */
+    }
+}
