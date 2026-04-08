@@ -1,4 +1,4 @@
-
+/* jshint esversion: 6 */ 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const puntosTxt = document.getElementById("puntos");
@@ -11,7 +11,7 @@ const enemigoImg = new Image(); enemigoImg.src = "alien.png";
 const balaImg = new Image();    balaImg.src = "bala.png";
 const boomImg = new Image();    boomImg.src = "boom.png";
 
-// Recursos - Sonidos (NUEVO)
+// Recursos - Sonidos
 const sonidoDisparo = new Audio("disparo.mp3");
 const sonidoExplosion = new Audio("explosion.mp3");
 const sonidoGameOver = new Audio("gameover.mp3");
@@ -40,7 +40,7 @@ let ladrillos = [];
 let direccionFlota = 1;
 let velocidadFlota = 2;
 let balasJugador = [];
-let balasEnemigas = []; // Se usará para los disparos de los aliens
+let balasEnemigas = []; 
 let ultimoDisparoEnemigo = 0;
 
 function inicializarNivel() {
@@ -56,7 +56,7 @@ function inicializarNivel() {
                 x: 100 + c * (LADRILLO.w + LADRILLO.padding),
                 y: 60 + f * (LADRILLO.h + LADRILLO.padding),
                 visible: true,
-                pum: 0 // Contador para la animación de explosión
+                pum: 0 
             });
         }
     }
@@ -67,7 +67,7 @@ function disparar() {
     if (energiaActual >= 1) { 
         balasJugador.push({ x: jugadorX + 25, y: jugadorY - 20, w: 20, h: 20 });
         energiaActual--; 
-        sonidoDisparo.currentTime = 0; // Reinicia el sonido si se dispara rápido
+        sonidoDisparo.currentTime = 0; 
         sonidoDisparo.play();
         actualizarUI(); 
     } 
@@ -75,7 +75,7 @@ function disparar() {
 
 function actualizarUI() {
     energyFill.style.width = (energiaActual / energiaMax * 100) + "%";
-    livesTxt.innerHTML = "LIVES: " + "❤️".repeat(vidas);
+    livesTxt.innerHTML = "LIVES: " + "🛟".repeat(vidas);
     puntosTxt.innerHTML = "SCORE: " + puntuacion;
 }
 
@@ -84,23 +84,19 @@ function update(timestamp) {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Recarga energía
     if (energiaActual < energiaMax && timestamp - ultimaRecarga > TIEMPO_RECARGA) {
         energiaActual++;
         ultimaRecarga = timestamp;
         actualizarUI();
     }
 
-    // Movimiento Jugador
-    if (teclas["ArrowLeft"] && jugadorX > 0) jugadorX -= 8;
-    if (teclas["ArrowRight"] && jugadorX < canvas.width - 70) jugadorX += 8;
+    if (teclas.ArrowLeft && jugadorX > 0) jugadorX -= 8;
+    if (teclas.ArrowRight && jugadorX < canvas.width - 70) jugadorX += 8;
     ctx.drawImage(jugadorImg, jugadorX, jugadorY, 70, 70);
 
-    // Gestión de la Flota
     let tocarBorde = false;
     let vivos = ladrillos.filter(b => b.visible);
     
-    // Aumentar velocidad según quedan menos enemigos
     velocidadFlota = LADRILLO.speedBase + (1 - vivos.length / (LADRILLO.F * LADRILLO.C)) * 5;
 
     vivos.forEach(b => {
@@ -108,7 +104,6 @@ function update(timestamp) {
         if (b.x + LADRILLO.w > canvas.width || b.x < 0) tocarBorde = true;
         ctx.drawImage(enemigoImg, b.x, b.y, LADRILLO.w, LADRILLO.h);
         
-        // Si los aliens llegan al jugador
         if (b.y + LADRILLO.h > jugadorY) finalizarJuego("GAME OVER", false);
     });
 
@@ -117,7 +112,6 @@ function update(timestamp) {
         ladrillos.forEach(b => b.y += 15);
     }
 
-    // Dibujar explosiones (PUM) de enemigos destruidos recientemente
     ladrillos.forEach(b => {
         if (!b.visible && b.pum > 0) {
             ctx.drawImage(boomImg, b.x, b.y, LADRILLO.w, LADRILLO.h);
@@ -125,7 +119,6 @@ function update(timestamp) {
         }
     });
 
-    // --- DISPAROS ENEMIGOS (NUEVO) ---
     if (timestamp - ultimoDisparoEnemigo > 1200 && vivos.length > 0) {
         const alienAzar = vivos[Math.floor(Math.random() * vivos.length)];
         balasEnemigas.push({ x: alienAzar.x + LADRILLO.w/2, y: alienAzar.y + 20, w: 15, h: 15 });
@@ -134,11 +127,9 @@ function update(timestamp) {
 
     balasEnemigas.forEach((be, index) => {
         be.y += 4;
-        // Dibujamos la bala enemiga (puedes usar un ctx.fillRect o una imagen)
         ctx.fillStyle = "yellow";
         ctx.fillRect(be.x, be.y, 8, 15);
 
-        // Colisión con Jugador
         if (be.x < jugadorX + 60 && be.x + 8 > jugadorX && be.y < jugadorY + 60 && be.y + 15 > jugadorY) {
             balasEnemigas.splice(index, 1);
             vidas--;
@@ -148,7 +139,6 @@ function update(timestamp) {
         if (be.y > canvas.height) balasEnemigas.splice(index, 1);
     });
 
-    // --- BALAS JUGADOR ---
     balasJugador.forEach((bala, index) => {
         bala.y -= 10;
         ctx.drawImage(balaImg, bala.x, bala.y, bala.w, bala.h);
@@ -156,7 +146,7 @@ function update(timestamp) {
         vivos.forEach(b => {
             if (bala.x < b.x + LADRILLO.w && bala.x + bala.w > b.x && bala.y < b.y + LADRILLO.h && bala.y + bala.h > b.y) {
                 b.visible = false;
-                b.pum = 15; // Mostrar explosión durante 15 frames
+                b.pum = 15; 
                 balasJugador.splice(index, 1);
                 puntuacion += 10;
                 sonidoExplosion.currentTime = 0;
@@ -187,6 +177,10 @@ window.addEventListener("keyup", (e) => {
 
 // Botones de Interfaz
 document.getElementById("single-level").onclick = () => {
+    [sonidoDisparo, sonidoExplosion, sonidoGameOver, sonidoVictoria].forEach(s => {
+        s.play().then(() => { s.pause(); s.currentTime = 0; }).catch(() => {});
+    });
+
     document.querySelector(".modos").style.display = "none";
     juegoActivo = true;
     inicializarNivel();
@@ -201,20 +195,22 @@ function finalizarJuego(msg, victoria) {
     document.getElementById("modal-title").textContent = msg;
     
     if (victoria) {
-        sonidoVictoria.play();
+        sonidoVictoria.currentTime = 0;
+        sonidoVictoria.play().catch(e => console.log(e));
     } else {
-        sonidoGameOver.play();
+        sonidoGameOver.currentTime = 0;
+        sonidoGameOver.play().catch(e => console.log(e));
     }
 }
 
 // Eventos para botones móviles
-document.getElementById("btn-left").ontouchstart = () => { teclas["ArrowLeft"] = true; };
-document.getElementById("btn-left").ontouchend = () => { teclas["ArrowLeft"] = false; };
+document.getElementById("btn-left").ontouchstart = (e) => { e.preventDefault(); teclas.ArrowLeft = true; };
+document.getElementById("btn-left").ontouchend = (e) => { e.preventDefault(); teclas.ArrowLeft = false; };
 
-document.getElementById("btn-right").ontouchstart = () => { teclas["ArrowRight"] = true; };
-document.getElementById("btn-right").ontouchend = () => { teclas["ArrowRight"] = false; };
+document.getElementById("btn-right").ontouchstart = (e) => { e.preventDefault(); teclas.ArrowRight = true; };
+document.getElementById("btn-right").ontouchend = (e) => { e.preventDefault(); teclas.ArrowRight = false; };
 
 document.getElementById("btn-shoot").ontouchstart = (e) => {
-    e.preventDefault(); // Evita zoom accidental
+    e.preventDefault(); 
     if (juegoActivo) disparar();
 };
