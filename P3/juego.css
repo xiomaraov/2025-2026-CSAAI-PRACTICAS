@@ -1,4 +1,4 @@
-/* --- CONFIGURACIÓN GLOBAL --- */
+
 body {
   margin: 0;
   padding: 0;
@@ -8,6 +8,7 @@ body {
   align-items: center;
   min-height: 100vh;
   background: radial-gradient(circle, #e4b419 0%, #d2cfee 100%);
+  background:url("fondo_espacio.jpg");
   font-family: 'Orbitron', sans-serif;
   overflow: hidden;
   color: white;
@@ -38,7 +39,7 @@ body {
   display: block;
 }
 
-/* --- INTERFAZ --- */
+/* --- INTERFAZ SUPERIOR --- */
 #ui-layer {
   position: absolute;
   top: 0;
@@ -56,7 +57,7 @@ body {
 #energy-bar { width: 120px; height: 15px; border: 2px solid #00ffff; background: #000; }
 #energy-fill { width: 100%; height: 100%; background: #00ffff; transition: width 0.2s; }
 
-/* --- BOTÓN ARCADE CENTRADO --- */
+/* --- BOTÓN START MISSION --- */
 .modos {
   position: absolute;
   top: 50%;
@@ -68,27 +69,87 @@ body {
 #single-level {
   background: #ff0077;
   color: white;
-  padding: 30px 60px;
-  font-size: 30px;
+  padding: 25px 50px;
+  font-size: 28px;
   font-family: 'Orbitron', sans-serif;
   border: 4px solid #00ffff;
   cursor: pointer;
   box-shadow: 0 0 20px #ff0077;
   transition: 0.3s;
+  text-transform: uppercase;
 }
 
 #single-level:hover {
-  transform: scale(1.1);
+  transform: scale(1.05) translate(-0%, -0%); /* Ajuste para mantener el centro */
   background: #00ffff;
-  color: rgb(214, 34, 34);
+  color: #ff0077;
 }
 
-/* --- MODAL Y CONTROLES --- */
+.game-controls {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 15px 40px;
+  background: rgba(26, 92, 101, 0.3); /* Color integrado con el fondo del juego */
+  border: 2px solid #e177b6;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(225, 119, 182, 0.2);
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.control-label {
+  font-size: 10px;
+  color: #a5f1af;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.game-controls button {
+  width: 45px;
+  height: 45px;
+  background: #1a1a2e;
+  border: 2px solid #00ffff;
+  color: #00ffff;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-controls button:hover {
+  background: #00ffff;
+  color: #1a1a2e;
+  box-shadow: 0 0 15px #00ffff;
+}
+
+/* Botón de disparo diferenciado */
+.btn-shoot {
+  border-color: #ff0077 !important;
+  color: #ff0077 !important;
+}
+
+.btn-shoot:hover {
+  background: #ff0077 !important;
+  color: white !important;
+  box-shadow: 0 0 15px #ff0077 !important;
+}
+
+
 .modal {
   display: none;
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
   z-index: 200;
   justify-content: center; align-items: center;
 }
@@ -98,10 +159,5 @@ body {
   padding: 40px;
   border: 3px solid #ff0077;
   text-align: center;
-}
-
-.game-controls button {
-  width: 60px; height: 60px;
-  background: #222; border: 2px solid #00ffff;
-  color: white; border-radius: 10px; font-size: 20px;
+  box-shadow: 0 0 30px #ff0077;
 }
