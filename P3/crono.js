@@ -206,3 +206,15 @@ function finalizarJuego(msg, victoria) {
         sonidoGameOver.play();
     }
 }
+
+// Eventos para botones móviles
+document.getElementById("btn-left").ontouchstart = () => { teclas["ArrowLeft"] = true; };
+document.getElementById("btn-left").ontouchend = () => { teclas["ArrowLeft"] = false; };
+
+document.getElementById("btn-right").ontouchstart = () => { teclas["ArrowRight"] = true; };
+document.getElementById("btn-right").ontouchend = () => { teclas["ArrowRight"] = false; };
+
+document.getElementById("btn-shoot").ontouchstart = (e) => {
+    e.preventDefault(); // Evita zoom accidental
+    if (juegoActivo) disparar();
+};
