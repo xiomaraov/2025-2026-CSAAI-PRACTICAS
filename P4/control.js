@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */ 
 var sonido = new Audio('musica_fondo.mp3');
 sonido.loop = true; 
 

@@ -1,0 +1,83 @@
+body { 
+    background-color: #1a1a1a; 
+    background-image: url('otro_fondo.jpeg');
+    
+    /* Modificaciones para que sea una sola imagen y ocupe todo el espacio de la pagina */
+    background-size: cover;       /* Cubre toda la pantalla */
+    background-repeat: no-repeat; /* No se repite */
+    background-position: center;  /* Centrada */
+    background-attachment: fixed; /* No se mueve al hacer scroll */
+
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    margin: 0;  /* se usa para que la imagen de fondo no deje un pequeño espacio arriba ni abajo  */
+    text-align: center; 
+}
+
+#campo {
+    width: 800px; height: 400px;
+    background-color: #2e7d32; /* Verde césped */
+    border: 5px solid white;
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Personajes y pelota */
+#jugador, #bot, #pelota { position: absolute; border-radius: 50%; }
+
+#jugador { 
+    width: 30px; 
+    height: 30px; 
+    background-color: rgb(147, 8, 160); 
+    left: 100px; 
+    top: 185px; 
+    border: 2px solid white; 
+}
+
+#bot { 
+    width: 30px; 
+    height: 30px; 
+    background-color: rgb(238, 100, 9); 
+    left: 670px; 
+    top: 185px; 
+}
+
+#pelota { 
+    width: 20px; 
+    height: 20px; 
+    background-color: white; 
+    left: 390px; 
+    top: 190px; 
+}
+
+/* Porterías y marcador */
+.porteria { 
+    position: absolute; 
+    width: 15px; 
+    height: 100px; 
+    background-color: rgba(255,255,255,0.4); 
+    top: 150px; 
+}
+
+.porteria-izq { left: 0; }
+.porteria-der { right: 0; }
+#marcador { 
+    font-size: 40px; /* Un poco más grande para la nueva fuente */
+    font-weight: bold; 
+    margin-top: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Sombra para resaltar */
+}
+
+#mensaje-estado { 
+    font-size: 60px; 
+    position: absolute; 
+    width: 100%; 
+    top: 150px; 
+    z-index: 10; 
+    font-weight: bold; 
+    text-shadow: 3px 3px 0px #000; /* Efecto retro arcade */
+}
+
+#pantalla-inicial { margin-top: 50px; }
+.oculto { display: none; }
