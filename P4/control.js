@@ -59,7 +59,7 @@ function configurarSecuenciaPorNivel() {
     } else if (seleccion === "foca-boca") {
         img1 = "foca.jpg"; img2 = "boca.jpg";
         txt1 = "FOCA"; txt2 = "BOCA";
-    } else if (seleccion === "piña-niña") {
+    } else if (seleccion === "Piña-Niña") {
         img1 = "piña.jpg"; img2 = "niña.jpg";
         txt1 = "PIÑA"; txt2 = "NIÑA";
     } else if (seleccion === "Hueso-Huevo") {
