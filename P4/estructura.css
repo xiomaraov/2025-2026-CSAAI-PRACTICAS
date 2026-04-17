@@ -36,10 +36,9 @@ body {
     justify-content: center;
     gap: 15px;
     color: white;
-    /* Eliminada la sombra */
+    
 }
 
-/* Botones y Selects: Estilo Minimalista Plano */
 button, select {
     padding: 10px 18px;
     border-radius: 8px;
@@ -49,7 +48,6 @@ button, select {
     cursor: pointer;
     font-weight: bold;
     font-family: inherit;
-    transition: all 0.2s;
     margin: 5px;
 }
 
@@ -58,7 +56,7 @@ button:hover {
     color: white;
 }
 
-/* Botón de música  */
+
 #boton-musica {
     background-color: #ffb300;
     border-color: #f57f17;
@@ -69,7 +67,6 @@ button:hover {
     background-color: #f57f17;
 }
 
-
 #cuerpo-principal {
     display: flex;
     flex-direction: row;
@@ -79,7 +76,6 @@ button:hover {
     width: 100%;
 }
 
-/* CUADRÍCULA */
 #cuadricula {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -91,14 +87,14 @@ button:hover {
     width: 130px;
     height: 165px;
     background-color: white;
-    border: 3px solid #efebe9; /* Borde sólido y plano */
+    border: 3px solid #efebe9; 
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     padding: 10px;
-    transition: transform 0.2s ease;
+    
 }
 
 .tarjeta img {
@@ -108,7 +104,7 @@ button:hover {
 }
 
 .etiqueta-negra {
-    background-color: #795548; /* Marrón para las etiquetas */
+    background-color: #795548; 
     color: white;
     padding: 8px;
     border-radius: 6px;
@@ -120,8 +116,8 @@ button:hover {
 }
 
 .activa {
-    border: 5px solid #ff5722 !important;
-    transform: scale(1.05);
+    border: 5px solid #86ff23 !important;
+    
     background-color: #fbe9e7;
 }
 
@@ -139,27 +135,41 @@ button:hover {
     margin-top: 0;
 }
 
+/* Estilo para el mensaje de victoria final */
+.mensaje-final {
+    color: #d84315;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    animation: aparecer 0.5s ease-out;
+}
+
+.mensaje-final small {
+    display: block;
+    font-size: 1.2rem;
+    color: #795548;
+    margin-top: 10px;
+}
+
 /* --- ADAPTACIÓN PARA MÓVILES */
-
 @media (max-width: 850px) {
-    #cuerpo-principal {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    #cuadricula {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+    .cuadricula {
+        grid-template-columns: repeat(4, 1fr); 
+        gap: 5px; 
     }
 
     .tarjeta {
-        width: 145px;
-        height: 160px;
+        width: 100%; 
+        padding: 5px;
     }
 
-    #ajustes {
-        width: 90%;
-        max-width: 350px;
-        margin-top: 20px;
+    .tarjeta img {
+        width: 40px; 
+        height: 40px;
+    }
+
+    .palabra-tarjeta {
+        font-size: 0.7rem; 
     }
 }
+

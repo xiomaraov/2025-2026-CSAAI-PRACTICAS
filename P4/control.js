@@ -12,7 +12,7 @@ document.getElementById("boton-musica").onclick = function() {
     }
 };
 
-// Variables de datos (se mantienen igual)
+// Variables de inicio siemore iguales
 var fotosCama = ["cama.jpg", "cama.jpg", "cama.jpg", "cama.jpg", "casa.jpg", "casa.jpg", "casa.jpg", "casa.jpg"];
 var palabras = ["CAMA", "CAMA", "CAMA", "CAMA", "CASA", "CASA", "CASA", "CASA"];
 
@@ -126,7 +126,8 @@ document.getElementById("btn-comenzar").onclick = function() {
 function empezarRonda() {
     if (nivelActual > 5) {
         pararTodo();
-        textoAnuncio.innerText = "¡FIN DEL JUEGO!";
+        textoAnuncio.innerHTML = "¡PARTIDA COMPLETADA! 🎉 <br><small>Tiempo total: " + segundos.toFixed(1) + "s</small>";
+        textoAnuncio.classList.add("mensaje-final"); 
         return;
     }
 
@@ -136,7 +137,6 @@ function empezarRonda() {
     textoNivel.innerText = nivelActual + "/5";
     posicionActual = 0;
     
-
     var velocidades = [0, 1200, 1000, 800, 650, 400];
     var velocidad = velocidades[nivelActual];
 
@@ -165,8 +165,22 @@ document.getElementById("btn-detener").onclick = function() {
 function pararTodo() {
     clearInterval(intervalojuego);
     clearInterval(intervaloTiempo);
+    
+    // Detener música y resetear estado inicial de todos los controles 
+    sonido.pause();
+    sonido.currentTime = 0;
+    document.getElementById("boton-musica").innerText = "Música: OFF";
     document.getElementById("btn-comenzar").disabled = false;
     document.getElementById("sel-nivel").disabled = false;
+    
     textoEstado.innerText = "En espera";
     textoAnuncio.innerText = 'Pulsa "Empezar"';
+    textoAnuncio.classList.remove("mensaje-final"); 
+    textoAnuncio.innerText = 'Pulsa "Empezar"';
+
+    // Limpiar resaltado de tarjetas
+    for (var i = 0; i < 8; i++) {
+        var tarjeta = document.getElementById("foto-" + i);
+        if (tarjeta) tarjeta.classList.remove("activa");
+    }
 }
