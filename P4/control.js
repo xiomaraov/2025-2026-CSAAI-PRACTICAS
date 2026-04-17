@@ -152,8 +152,8 @@ function empezarRonda() {
         } else {
             clearInterval(intervalojuego);
             nivelActual++;
-            // Pausa de cortesía de 1.1segundos entre niveles para asimilar el cambio
-            setTimeout(empezarRonda, 1100); 
+            // Pausa de cortesía de 850ms entre niveles para asimilar el cambio
+            setTimeout(empezarRonda, 850); 
         }
     }, velocidad);
 }
