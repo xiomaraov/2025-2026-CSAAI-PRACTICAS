@@ -150,7 +150,7 @@ button:hover {
     margin-top: 10px;
 }
 
-/* --- ADAPTACIÓN PARA MÓVILES  */
+/* ADAPTACIÓN PARA MÓVILES  */
 @media (max-width: 850px) {
     #cuerpo-principal {
         flex-direction: column; 
@@ -165,7 +165,7 @@ button:hover {
     }
 
     #cuadricula {
-        grid-template-columns: repeat(4, 1fr); 
+        grid-template-columns: repeat(4, 1fr); /* Mantiene 4 columnas y 2 filas */
         gap: 8px; 
     }
 
