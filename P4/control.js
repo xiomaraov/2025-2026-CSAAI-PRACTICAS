@@ -91,7 +91,6 @@ function configurarSecuenciaPorNivel() {
             var patronNivel4 = [false, true, true, false, true, false, false, true];
             usarOpcion2 = patronNivel4[i];
         } else {
-            // Nivel 5: Aleatorio real para mayor dificultad en el juego 
             usarOpcion2 = Math.random() > 0.5;
         }
 
@@ -114,6 +113,8 @@ document.getElementById("btn-comenzar").onclick = function() {
     
     document.getElementById("btn-comenzar").disabled = true;
     document.getElementById("sel-nivel").disabled = true;
+    // Habilitar botón de música por si venimos de una partida completada
+    document.getElementById("boton-musica").disabled = false; 
 
     empezarRonda();
 
@@ -126,6 +127,12 @@ document.getElementById("btn-comenzar").onclick = function() {
 function empezarRonda() {
     if (nivelActual > 5) {
         pararTodo();
+        // Forzar apagado y bloqueo al terminar
+        sonido.pause(); 
+        sonido.currentTime = 0;
+        document.getElementById("boton-musica").innerText = "Música: OFF";
+        document.getElementById("boton-musica").disabled = true; 
+
         textoAnuncio.innerHTML = "¡PARTIDA COMPLETADA! 🎉 <br><small>Tiempo total: " + segundos.toFixed(1) + "s</small>";
         textoAnuncio.classList.add("mensaje-final"); 
         return;
@@ -152,7 +159,6 @@ function empezarRonda() {
         } else {
             clearInterval(intervalojuego);
             nivelActual++;
-            // Pausa de cortesía de 850ms entre niveles para asimilar el cambio
             setTimeout(empezarRonda, 850); 
         }
     }, velocidad);
@@ -166,19 +172,18 @@ function pararTodo() {
     clearInterval(intervalojuego);
     clearInterval(intervaloTiempo);
     
-    // Detener música y resetear estado inicial de todos los controles 
     sonido.pause();
     sonido.currentTime = 0;
     document.getElementById("boton-musica").innerText = "Música: OFF";
+    // Asegurar que el botón esté habilitado para volver a empezar
+    document.getElementById("boton-musica").disabled = false; 
     document.getElementById("btn-comenzar").disabled = false;
     document.getElementById("sel-nivel").disabled = false;
     
     textoEstado.innerText = "En espera";
     textoAnuncio.innerText = 'Pulsa "Empezar"';
     textoAnuncio.classList.remove("mensaje-final"); 
-    textoAnuncio.innerText = 'Pulsa "Empezar"';
 
-    // Limpiar resaltado de tarjetas
     for (var i = 0; i < 8; i++) {
         var tarjeta = document.getElementById("foto-" + i);
         if (tarjeta) tarjeta.classList.remove("activa");
