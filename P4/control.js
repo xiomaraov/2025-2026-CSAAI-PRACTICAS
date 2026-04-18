@@ -1,4 +1,4 @@
-/* jshint esversion: 6 */ 
+/* jshint esversion: 6  para que no salten los errores de la version de JavaScript en el editor */
 
 
 var sonido = new Audio('musica_fondo.mp3');

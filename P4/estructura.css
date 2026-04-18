@@ -2,7 +2,6 @@
 
 body {
     text-align: center;
-    /* Fondo degradado en tonos crema y arena */
     background: linear-gradient(180deg, #fff5e6 0%, #ffecd2 100%);
     background: linear-gradient(rgba(255, 245, 230, 0.5), rgba(255, 245, 230, 0.5)), 
                 url("fondo_bueno.jpg");
@@ -129,7 +128,7 @@ button:hover {
     width: 220px;
 }
 
-#ajustes h3 {
+#ajustes h2 {
     color: #d84315;
     margin-top: 0;
 }
@@ -165,7 +164,7 @@ button:hover {
     }
 
     #cuadricula {
-        grid-template-columns: repeat(4, 1fr); /* Mantiene 4 columnas y 2 filas */
+        grid-template-columns: repeat(4, 1fr); /* Mantiene 4 columnas y 2 filas en el movil  */
         gap: 8px; 
     }
 
