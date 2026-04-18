@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+body {
+    text-align: center;
+    background: linear-gradient(180deg, #fff5e6 0%, #ffecd2 100%);
+    background: linear-gradient(rgba(255, 245, 230, 0.5), rgba(255, 245, 230, 0.5)), 
+                url("fondo_bueno.jpg");
+    
+    background-repeat: no-repeat;
+    background-size: cover;  
+    background-position: center;
+    background-attachment: fixed;
+    
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    color: #5d4037; 
+}
+
+#todo-el-juego {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+#cabecera {
+    background-color: #ff8a65;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 15px;
+    color: white;
+    
+}
+
+button, select {
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: 2px solid #d84315;
+    background-color: #ffffff;
+    color: #d84315;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: inherit;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #d84315;
+    color: white;
+}
+
+
+#boton-musica {
+    background-color: #ffb300;
+    border-color: #f57f17;
+    color: white;
+}
+
+#boton-musica:hover {
+    background-color: #f57f17;
+}
+
+#cuerpo-principal {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    width: 100%;
+}
+
+#cuadricula {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+
+.tarjeta {
+    width: 130px;
+    height: 165px;
+    background-color: white;
+    border: 3px solid #efebe9; 
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+    
+}
+
+.tarjeta img {
+    width: 85px;
+    height: 85px;
+    object-fit: contain;
+}
+
+.etiqueta-negra {
+    background-color: #795548; 
+    color: white;
+    padding: 8px;
+    border-radius: 6px;
+    width: 85%;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 5px 0;
+}
+
+.activa {
+    border: 5px solid #86ff23 !important;
+    
+    background-color: #fbe9e7;
+}
+
+#ajustes {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    border: 3px solid #efebe9; 
+    text-align: left;
+    width: 220px;
+}
+
+#ajustes h2 {
+    color: #d84315;
+    margin-top: 0;
+}
+
+/* Estilo para el mensaje de victoria final */
+.mensaje-final {
+    color: #d84315;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    animation: aparecer 0.5s ease-out;
+}
+
+.mensaje-final small {
+    display: block;
+    font-size: 1.2rem;
+    color: #795548;
+    margin-top: 10px;
+}
+
+/* ADAPTACIÓN PARA MÓVILES  */
+@media (max-width: 850px) {
+    #cuerpo-principal {
+        flex-direction: column; 
+        align-items: center;
+    }
+
+    #ajustes {
+        width: 90%; /*  se adapta al ancho */
+        max-width: 400px;
+        margin-bottom: 20px;
+        text-align: center; /* Centra el texto en móviles */
+    }
+
+    #cuadricula {
+        grid-template-columns: repeat(4, 1fr); /* Mantiene 4 columnas y 2 filas en el movil  */
+        gap: 8px; 
+    }
+
+    .tarjeta {
+        width: 75px; 
+        height: 110px;
+        padding: 5px;
+    }
+
+    .tarjeta img {
+        width: 45px; 
+        height: 45px;
+    }
+
+    .etiqueta-negra {
+        font-size: 9px;
+        padding: 4px;
+    }
+}

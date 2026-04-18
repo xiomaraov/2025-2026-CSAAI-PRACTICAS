@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beat The Word 🔠</title>
+    <link rel="stylesheet" href="estructura.css">
+</head>
+<body>
+
+    <div id="todo-el-juego">
+        <div id="cabecera">
+            <h1>Beat The Word</h1>
+            <div class="dato">Nivel: <span id="nivel-texto">1/5</span></div>
+            <div class="dato">Tiempo: <span id="tiempo-texto">0.0s</span></div>
+            <div class="dato">Estado: <span id="estado-texto">En espera</span></div>
+            <button id="boton-musica">Música: ON</button> 
+        </div>
+
+        <div id="cuerpo-principal">
+            <div id="ajustes">
+                <h2>Configuración</h2>
+                <p>El juego recorre las 8 imágenes. Tienes que decir la palabra antes del salto.</p>
+                
+                <label>Secuencia:</label><br>
+                <select id="sel-secuencia"> 
+                    <option value="Cama-Casa">Cama / Casa</option>
+                    <option value="Preso-Peso"> Preso / Peso </option>
+                    <option value="Queso-Beso">Queso / Beso</option>
+                    <option value="Bota-Gota">Bota / Gota</option>
+                    <option value="Piña-Niña">Piña / Niña</option>
+                    <option value="Globo-Gnomo">Globo / Gnomo</option>
+                    <option value="Bruja-Burbuja">Bruja / Burbuja</option>
+                    <option value="Oveja-Abeja">Oveja / Abeja</option>
+                    <option value="Zumo-Humo">Zumo / Humo</option>
+                </select>
+                <br><br>
+
+                <label>Nivel inicial:</label><br>
+                <select id="sel-nivel"> 
+                    <option value="1">Nivel 1</option>
+                    <option value="2">Nivel 2</option>
+                    <option value="3">Nivel 3</option>
+                    <option value="4">Nivel 4</option>
+                    <option value="5">Nivel 5</option>
+                </select>
+                <br><br>
+
+                <button id="btn-comenzar">Empezar partida</button> 
+                <button id="btn-detener">Detener</button>
+            </div>
+
+            <div id="zona-juego">
+                <div id="mensaje-grande">
+                    <h2 id="texto-anuncio">Pulsa "Empezar"</h2>
+                </div>
+                
+                <div id="cuadricula">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="control.js"></script>
+</body>
+</html>
