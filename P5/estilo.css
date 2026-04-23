@@ -1,67 +1,104 @@
 body { 
     background-color: #1a1a1a; 
     background-image: url('otro_fondo.jpeg');
-    
-    /* Modificaciones para que sea una sola imagen y ocupe todo el espacio de la pagina */
-    background-size: cover;       /* Cubre toda la pantalla */
-    background-repeat: no-repeat; /* No se repite */
-    background-position: center;  /* Centrada */
-    background-attachment: fixed; /* No se mueve al hacer scroll */
-
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
     color: white;
     font-family: 'Bebas Neue', sans-serif;
-    margin: 0;  /* se usa para que la imagen de fondo no deje un pequeño espacio arriba ni abajo  */
+    margin: 0;
     text-align: center; 
 }
 
 #campo {
-    width: 800px; height: 400px;
-    background-color: #2e7d32; /* Verde césped */
+    width: 800px; 
+    height: 400px;
+    background-color: #2e7d32;
+    /* Dibujo del campo: Círculo y línea central */
+    background-image: 
+        radial-gradient(circle at center, transparent 68px, white 68px, white 70px, transparent 70px),
+        linear-gradient(to right, transparent 399px, white 399px, white 401px, transparent 401px);
     border: 5px solid white;
     margin: 20px auto;
     position: relative;
     overflow: hidden;
 }
 
-/* Personajes y pelota */
-#jugador, #bot, #pelota { position: absolute; border-radius: 50%; }
-
-#jugador { 
-    width: 30px; 
-    height: 30px; 
-    background-color: rgb(147, 8, 160); 
-    left: 100px; 
-    top: 185px; 
-    border: 2px solid white; 
+/* Propiedades comunes */
+#jugador, #companero, #bot, #bot2, #pelota { 
+    position: absolute; 
+    border-radius: 50%; 
 }
 
-/* --- NUEVO: Guía visual de disparo (Requisito dirección visible) --- */
+/* --- EQUIPO LOCAL (Rojo/Rosa) --- */
+#jugador { 
+    width: 30px; height: 30px; 
+    background-color: rgb(228, 23, 91); 
+    border: 2px solid white;
+    /* Posición inicial */
+    left: 100px; top: 185px; 
+}
+
+#companero { 
+    width: 30px; height: 30px; 
+    background-color: rgb(228, 23, 91); 
+    border: 2px solid white;
+    /* Posición inicial */
+    left: 150px; top: 100px; 
+}
+
+/* --- EQUIPO VISITANTE (Azul) --- */
+#bot { 
+    width: 30px; height: 30px; 
+    background-color: rgb(0, 59, 136); 
+    border: 2px solid white;
+    /* Posición inicial */
+    left: 670px; top: 185px; 
+}
+
+#bot2 { 
+    width: 30px; height: 30px; 
+    background-color: rgb(0, 59, 136); 
+    border: 2px solid white;
+    /* Posición inicial */
+    left: 600px; top: 280px; 
+}
+
+/* --- PELOTA --- */
+#pelota { 
+    width: 20px; height: 20px; 
+    background-color: white;
+    /* Posición inicial centro */
+    left: 390px; top: 190px; 
+}
+
 #guia-tiro {
     position: absolute;
     width: 0; 
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-bottom: 12px solid gold; /* Flecha dorada */
-    top: -15px; /* Aparece justo encima del jugador */
+    border-bottom: 12px solid gold;
+    top: -15px;
     left: 10px;
-    transform-origin: center 25px; /* Eje de rotación */
+    transform-origin: center 25px;
 }
 
-#bot { 
-    width: 30px; 
-    height: 30px; 
-    background-color: rgb(238, 100, 9); 
-    left: 670px; 
-    top: 185px; 
-}
-
-#pelota { 
-    width: 20px; 
-    height: 20px; 
-    background-color: white; 
-    left: 390px; 
-    top: 190px; 
+.nombre-etiqueta {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    pointer-events: none;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 /* Porterías y marcador */
@@ -79,8 +116,14 @@ body {
 #marcador { 
     font-size: 40px; 
     font-weight: bold; 
-    margin-top: 10px;
+    padding-top: 10px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5); 
+    position: absolute;
+    width: 100%;       
+    left: 0;           
+    text-align: center; 
+    pointer-events: none; 
+    z-index: 5;        
 }
 
 #mensaje-estado { 
@@ -93,14 +136,12 @@ body {
     text-shadow: 3px 3px 0px #000; 
 }
 
-/* --- MEJORA: Pantalla inicial mejor posicionada --- */
 #pantalla-inicial { 
     margin-top: 50px; 
     position: relative;
     z-index: 20;
 }
 
-/* --- CLASE CRÍTICA: Asegura que el menú se oculte/muestre bien --- */
 .oculto { 
     display: none !important; 
 }
