@@ -5,39 +5,59 @@ const b = document.getElementById('bot');
 const marc = document.getElementById('marcador');
 const msg = document.getElementById('mensaje-estado');
 const menu = document.getElementById('pantalla-inicial');
+const guia = document.getElementById('guia-tiro');
 
 // Estado del juego
 let jX = 100, jY = 185, bX = 670, bY = 185, pX = 390, pY = 190;
+let anguloJ = 0; // Nueva variable para el giro (en grados)
 let pVelX = 0, pVelY = 0;
 let golesJ = 0, golesB = 0;
-let modoActual = 0; // 3 para "3 goles", 1 para "Gol de oro"
+let modoActual = 0; 
 let activo = false;
 let teclas = {};
 
-// 1. Elegir modo de juego (Pulsar 1 o 2)
+// 1. Controles
 window.onkeydown = (e) => {
-    teclas[e.key] = true;
-    if (e.key === '1') iniciar(3);
-    if (e.key === '2') iniciar(1);
-    if (e.key === 'r' || e.key === 'R') location.reload();
+    teclas[e.key.toLowerCase()] = true; 
+    if (e.key === '1' && !activo) iniciar(3);
+    if (e.key === '2' && !activo) iniciar(1);
+    if (e.key.toLowerCase() === 'r') location.reload();
+    if (e.key.toLowerCase() === 'm') volverAlMenu();
 };
-window.onkeyup = (e) => teclas[e.key] = false;
+window.onkeyup = (e) => teclas[e.key.toLowerCase()] = false;
 
 function iniciar(goles) {
     modoActual = goles;
     menu.classList.add('oculto');
+    golesJ = 0; golesB = 0;
+    marc.innerText = "0 - 0";
+    resetearPosiciones();
     cuentaAtras();
 }
 
-// 2. Cuenta atrás (Al empezar y tras cada gol)
+function volverAlMenu() {
+    activo = false;
+    menu.classList.remove('oculto');
+    msg.innerText = "";
+    resetearPosiciones();
+}
+
+function resetearPosiciones() {
+    jX = 100; jY = 185; bX = 670; bY = 185; pX = 390; pY = 190;
+    pVelX = 0; pVelY = 0; anguloJ = 0;
+}
+
 function cuentaAtras() {
     activo = false;
     let contador = 3;
     msg.innerText = contador;
     let timer = setInterval(() => {
         contador--;
-        msg.innerText = contador > 0 ? contador : "¡YA!";
-        if (contador < 0) {
+        if (contador > 0) {
+            msg.innerText = contador;
+        } else if (contador === 0) {
+            msg.innerText = "¡YA!";
+        } else {
             clearInterval(timer);
             msg.innerText = "";
             activo = true;
@@ -45,33 +65,43 @@ function cuentaAtras() {
     }, 1000);
 }
 
-// 3. Bucle principal (Movimiento y Física)
+// 3. Bucle principal
 function actualizar() {
     if (activo) {
         // Movimiento Jugador
-        if (teclas.ArrowUp && jY > 0) jY -= 5;
-        if (teclas.ArrowDown && jY < 370) jY += 5;
-        if (teclas.ArrowLeft && jX > 0) jX -= 5;
-        if (teclas.ArrowRight && jX < 770) jX += 5;
+        if (teclas.arrowup && jY > 0) jY -= 5;
+        if (teclas.arrowdown && jY < 370) jY += 5;
+        if (teclas.arrowleft && jX > 0) jX -= 5;
+        if (teclas.arrowright && jX < 770) jX += 5;
 
-        // IA del Bot (Persigue la pelota)
-        if (bY < pY) bY += 2;
-        if (bY > pY) bY -= 2;
-        if (bX > pX) bX -= 2;
+        // Giro de dirección (A y D)
+        if (teclas.a) anguloJ -= 5;
+        if (teclas.d) anguloJ += 5;
 
-        // Movimiento Pelota (Fricción)
+        // IA del Bot
+        if (bY < pY) bY += 2.5;
+        if (bY > pY) bY -= 2.5;
+        if (bX < pX && bX < 770) bX += 2;
+        if (bX > pX && bX > 400) bX -= 2;
+
+        // Movimiento Pelota
         pX += pVelX; pY += pVelY;
         pVelX *= 0.98; pVelY *= 0.98;
 
-        // Rebotes en paredes
+        // Rebotes
         if (pY <= 0 || pY >= 380) pVelY *= -1;
 
-        // Chutar (Colisión básica)
-        if (Math.abs(jX - pX) < 25 && Math.abs(jY - pY) < 25 && teclas[' ']) {
-            pVelX = 10; pVelY = (pY - jY) * 0.3;
+        // Chutar con ángulo
+        if (Math.abs(jX - pX) < 30 && Math.abs(jY - pY) < 30 && teclas[' ']) {
+            let rad = (anguloJ - 90) * (Math.PI / 180);
+            pVelX = Math.cos(rad) * 12;
+            pVelY = Math.sin(rad) * 12;
         }
+
+        // Colisión Bot
         if (Math.abs(bX - pX) < 25 && Math.abs(bY - pY) < 25) {
-            pVelX = -7; // El bot despeja
+            pVelX = -8; 
+            pVelY = (pY - bY) * 0.2;
         }
 
         // Goles
@@ -79,8 +109,9 @@ function actualizar() {
         if (pX <= 0 && pY > 150 && pY < 250) marcar('bot');
         if (pX <= 0 || pX >= 785) pVelX *= -1;
 
-        // Dibujar posiciones
+        // Dibujar
         j.style.left = jX + 'px'; j.style.top = jY + 'px';
+        guia.style.transform = `rotate(${anguloJ}deg)`;
         b.style.left = bX + 'px'; b.style.top = bY + 'px';
         p.style.left = pX + 'px'; p.style.top = pY + 'px';
     }
@@ -92,12 +123,12 @@ function marcar(quien) {
     else { golesB++; msg.innerText = "¡GOL RIVAL!"; }
     
     marc.innerText = `${golesJ} - ${golesB}`;
-    jX = 100; jY = 185; bX = 670; bY = 185; pX = 390; pY = 190;
-    pVelX = 0; pVelY = 0;
+    activo = false;
+    resetearPosiciones();
 
     if (golesJ >= modoActual || golesB >= modoActual) {
-        activo = false;
-        msg.innerHTML = (golesJ > golesB ? "¡HAS GANADO!" : "HAS PERDIDO") + "<br><small>Pulsa R para reiniciar</small>";
+        msg.innerHTML = (golesJ > golesB ? "¡HAS GANADO!" : "HAS PERDIDO") + 
+                        "<br><small>R: Reiniciar | M: Menú</small>";
     } else {
         setTimeout(cuentaAtras, 1500);
     }

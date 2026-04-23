@@ -35,6 +35,19 @@ body {
     border: 2px solid white; 
 }
 
+/* --- NUEVO: Guía visual de disparo (Requisito dirección visible) --- */
+#guia-tiro {
+    position: absolute;
+    width: 0; 
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 12px solid gold; /* Flecha dorada */
+    top: -15px; /* Aparece justo encima del jugador */
+    left: 10px;
+    transform-origin: center 25px; /* Eje de rotación */
+}
+
 #bot { 
     width: 30px; 
     height: 30px; 
@@ -62,11 +75,12 @@ body {
 
 .porteria-izq { left: 0; }
 .porteria-der { right: 0; }
+
 #marcador { 
-    font-size: 40px; /* Un poco más grande para la nueva fuente */
+    font-size: 40px; 
     font-weight: bold; 
     margin-top: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Sombra para resaltar */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); 
 }
 
 #mensaje-estado { 
@@ -76,8 +90,17 @@ body {
     top: 150px; 
     z-index: 10; 
     font-weight: bold; 
-    text-shadow: 3px 3px 0px #000; /* Efecto retro arcade */
+    text-shadow: 3px 3px 0px #000; 
 }
 
-#pantalla-inicial { margin-top: 50px; }
-.oculto { display: none; }
+/* --- MEJORA: Pantalla inicial mejor posicionada --- */
+#pantalla-inicial { 
+    margin-top: 50px; 
+    position: relative;
+    z-index: 20;
+}
+
+/* --- CLASE CRÍTICA: Asegura que el menú se oculte/muestre bien --- */
+.oculto { 
+    display: none !important; 
+}
