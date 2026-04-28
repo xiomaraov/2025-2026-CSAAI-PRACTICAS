@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>  Bot League ⚽ </title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div id="contenedor">
+        <h1>Bot League</h1>
+        
+        <div id="pantalla-inicial">
+            <h2>Elige modo de juego</h2>
+            <p>Pulsa 1: Partido a 3 goles</p>
+            <p>Pulsa 2: Gol de oro</p>
+        </div>
+
+        <div id="campo">
+            <div id="marcador">TÚ 0 - 0 MÁQUINA</div>
+            <div id="mensaje-estado"></div> 
+            
+            <div id="jugador">
+                <span class="nombre-etiqueta">TÚ </span>
+                <div id="guia-tiro"></div>
+            </div>
+
+            <div id="companero">
+                <span class="nombre-etiqueta">COMPAÑERO</span>
+            </div>
+
+            <div id="bot">
+                <span class="nombre-etiqueta">MÁQUINA</span>
+            </div>
+
+            <div id="bot2">
+                <span class="nombre-etiqueta">DEFENSA RIVAL</span>
+            </div>
+
+            <div id="pelota"></div>
+            
+            <div class="porteria porteria-izq"></div>
+            <div class="porteria porteria-der"></div>
+        </div>
+
+        <p>Flechas: Mover | <b>A/D: Girar dirección del balon </b> | Espacio: Chutar | R: Reiniciar | <b>M: Menú</b></p>
+    </div>
+    <script src="crono.js"></script>
+</body>
+</html>
