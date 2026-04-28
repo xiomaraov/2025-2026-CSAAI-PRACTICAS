@@ -22,7 +22,6 @@ let modoActual = 0;
 let activo = false;
 let teclas = {};
 
-// Controles
 window.onkeydown = (e) => {
     teclas[e.key.toLowerCase()] = true; 
     if (e.key === '1' && !activo) iniciar(3);
@@ -102,19 +101,19 @@ function actualizar() {
         if (teclas.a) anguloJ -= 5;
         if (teclas.d) anguloJ += 5;
 
-        // IA Compañero
+        //  Compañero
         if (compY < jY - 40) compY += 3;
         if (compY > jY + 40) compY -= 3;
         if (compX < jX - 50) compX += 3;
         if (compX > jX + 50) compX -= 3;
 
-        // IA Bot principal
+        // Bot principal
         if (bY < pY) bY += 2.5;
         if (bY > pY) bY -= 2.5;
         if (bX < pX && bX < 770) bX += 2;
         if (bX > pX && bX > 400) bX -= 2;
 
-        // IA Defensa Rival
+        //  Defensa Rival
         if (b2Y < pY - 20) b2Y += 2;
         if (b2Y > pY + 20) b2Y -= 2;
         b2X = 650; 
@@ -136,14 +135,13 @@ function actualizar() {
             else { pX = 780; pVelX *= -1; }
         }
 
-        // Chutar (Espacio)
+        // Chutar
         if (Math.abs(jX - pX) < 30 && Math.abs(jY - pY) < 30 && teclas[' ']) {
             let rad = (anguloJ - 90) * (Math.PI / 180);
             pVelX = Math.cos(rad) * 12;
             pVelY = Math.sin(rad) * 12;
         }
 
-        // Colisiones
         let otros = [
             {x: bX, y: bY, vx: -8}, 
             {x: b2X, y: b2Y, vx: -8}, 
